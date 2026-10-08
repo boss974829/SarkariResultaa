@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Source Sans 3", "Segoe UI", sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --color-paper: #f6f5f3;
+  --color-ink: #1c1c1c;
+  --color-maroon: #b42318;
+  --color-navy: #102a56;
+  --color-link: #163a7a;
+  --color-cream: #ffffff;
+  --color-sand: #fff6d8;
+  --color-muted: #5e5a55;
+  --color-card: #ffffff;
+  --color-line: #e4e0da;
+}
+
+@layer base {
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+  }
+  body {
+    font-family: var(--font-sans);
+    line-height: 1.45;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  a {
+    color: var(--color-link);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-maroon);
+    outline-offset: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a,
+  button {
+    transition: none;
+  }
+  .pulse-dot,
+  .alert-star {
+    animation: none;
+  }
+  .ticker-track {
+    animation: none;
+    flex-wrap: wrap;
+    width: auto;
+  }
+}
+
+.pulse-dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: currentColor;
+  animation: rajpatra-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes rajpatra-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+html[lang="hi"] body {
+  font-family: "Noto Sans Devanagari", "Source Sans 3", sans-serif;
+}
+
+.ticker {
+  overflow: hidden;
+  background: transparent;
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: rajpatra-ticker 42s linear infinite;
+}
+.ticker:hover .ticker-track,
+.ticker:focus-within .ticker-track {
+  animation-play-state: paused;
+}
+@keyframes rajpatra-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.alert-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.08rem;
+  flex-shrink: 0;
+  font-size: 0.95em;
+  line-height: 1;
+}
+.alert-star {
+  display: inline-block;
+}
+.star-red {
+  color: #e10600;
+}
+.star-green {
+  color: #0b8f22;
+  animation-delay: 0.3s;
+}
+.star-yellow {
+  color: #e6b000;
+  animation-delay: 0.6s;
+}
+.on-dark {
+  background: #fff;
+  padding: 0.05rem 0.28rem 0.12rem;
+  border-radius: 2px;
+}
+@keyframes star-blink {
+  0%,
+  45% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+  46%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+
+.skip {
+  position: absolute;
+  left: -999px;
+  top: 0;
+}
+.skip:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 50;
+  background: var(--color-cream);
+  color: var(--color-ink);
+  padding: 0.5rem 1rem;
+}
